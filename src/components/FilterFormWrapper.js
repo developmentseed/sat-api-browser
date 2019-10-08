@@ -117,8 +117,9 @@ export const FilterFormWrapper = withFormik({
     const filter = {
       limit,
       bbox,
-      query,
-      time: `${format(startdatetime, formatStr)}/${format(enddatetime, formatStr)}`
+      //query,
+      time: `${format(startdatetime, formatStr)}/${format(enddatetime, formatStr)}`,
+      collectionId: 'C1511851502-NSIDC_ECS'
     };
     fetchFilteredItemsAction(filter);
     setSubmitting(false);
