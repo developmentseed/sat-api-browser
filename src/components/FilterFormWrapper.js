@@ -102,6 +102,8 @@ export const FilterFormWrapper = withFormik({
   },
 
   handleSubmit: (values, { props, setSubmitting }) => {
+    console.log('values are:\n')
+    console.log(values)
     const {
       fetchFilteredItemsAction,
       bbox

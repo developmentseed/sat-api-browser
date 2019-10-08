@@ -13,6 +13,7 @@ import { loading, failed } from '../constants/applicationConstants';
 import ProgressButton from './ProgressButton';
 import PropertySelector from './PropertySelector';
 import PropertyFilters from './PropertyFilters';
+import WrappedTextField from './WrappedTextField';
 
 const styles = theme => ({
   button: {
@@ -65,6 +66,19 @@ export const FilterForm = (props) => {
     >
       <Grid item xs={8}>
         <form onSubmit={handleSubmit}>
+          <FormLabel component="legend">
+            CMR Collection ID
+          </FormLabel>
+          <WrappedTextField
+            name='collectionId'
+            label='C1511851502-NSIDC_ECS'
+            type='string'
+            values={values}
+            {...formikFieldProps}
+          />
+          <br />
+          <br />
+
           <FormLabel component="legend">
             Date Range
           </FormLabel>
@@ -120,7 +134,7 @@ export const FilterForm = (props) => {
           <div className={classes.submit}>
             <ProgressButton
               type="submit"
-              disabled={!isValid || !bbox || status === loading}
+              //disabled={!isValid || !bbox || status === loading}
               label="Submit Query"
               status={status}
               onClick={handleSubmit}
