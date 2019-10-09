@@ -102,8 +102,6 @@ export const FilterFormWrapper = withFormik({
   },
 
   handleSubmit: (values, { props, setSubmitting }) => {
-    console.log('values are:\n')
-    console.log(values)
     const {
       fetchFilteredItemsAction,
       bbox
@@ -121,7 +119,7 @@ export const FilterFormWrapper = withFormik({
       bbox,
       //query,
       time: `${format(startdatetime, formatStr)}/${format(enddatetime, formatStr)}`,
-      collectionId: 'C1511851502-NSIDC_ECS'
+      collectionId: values.collectionId.eq
     };
     fetchFilteredItemsAction(filter);
     setSubmitting(false);
