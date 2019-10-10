@@ -33,7 +33,7 @@ export const ImageItems = (props) => {
   const cellWidth = (panelWidth / 2);
   const items = imageItems.map((item) => {
     const id = item.get('id');
-    const thumbnail = item.getIn(['assets', 'browse', 'href']);
+    const thumbnail = item.getIn(['assets', 'thumbnail', 'href']);
     const stacId = item.get('stacId');
     const datetime = item.getIn(['properties', 'datetime']);
     const collection = item.getIn(['properties', 'collection']);

@@ -78,14 +78,14 @@ const setActiveImageItem = (state, payload) => {
     const viewport = getViewport(state, imageItemJS);
 
     const tileJsonUrl = 'https://htihpuyave.execute-api.us-east-1.amazonaws.com/production/tilejson.json';
-    const s3_cog_url = 's3://project-drop/sat-explorer-assets/ATL08_20181014003519_02350106_001_01.cog.tif';
-    const rescale = '1.5,340282346638528859811704183484516925440.000&nodata=0';
-    const tilePath = `${tileJsonUrl}?url=${s3_cog_url}&rescale=${rescale}`;
+    const s3CogUrl = imageItem.getIn(['assets', 'browse', 'href']);
+    const tilePath = `${tileJsonUrl}?url=${s3CogUrl}&rescale=0,70&color_map=schwarzwald`;
 
     newState = state.withMutations((tempState) => {
       tempState.set('activeImageItemId', imageId);
       tempState.setIn(['style', 'center'], fromJS(viewport.center));
-      tempState.setIn(['style', 'zoom'], viewport.zoom - 0.5);
+      console.log(`viewport.zoom ${viewport.zoom}`);
+      tempState.setIn(['style', 'zoom'], 8)//viewport.zoom - 0.5);
       tempState.setIn(
         ['style', 'sources', activeImageItemSource, 'url'], tilePath
       );
@@ -120,7 +120,7 @@ function setFilteredDataSource(state, payload) {
     if (features.length) {
       const viewport = getViewport(state, payload);
       tempState.setIn(['style', 'center'], fromJS(viewport.center));
-      tempState.setIn(['style', 'zoom'], viewport.zoom - 0.5);
+      tempState.setIn(['style', 'zoom'], 8);//viewport.zoom - 0.5);
       tempState.set('highestId', state.get('highestId') + features.length);
     }
     if (currentFilter.page) {
