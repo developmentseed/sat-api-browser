@@ -84,8 +84,7 @@ const setActiveImageItem = (state, payload) => {
     newState = state.withMutations((tempState) => {
       tempState.set('activeImageItemId', imageId);
       tempState.setIn(['style', 'center'], fromJS(viewport.center));
-      console.log(`viewport.zoom ${viewport.zoom}`);
-      tempState.setIn(['style', 'zoom'], 8)//viewport.zoom - 0.5);
+      tempState.setIn(['style', 'zoom'], viewport.zoom - 0.5);
       tempState.setIn(
         ['style', 'sources', activeImageItemSource, 'url'], tilePath
       );
@@ -120,7 +119,7 @@ function setFilteredDataSource(state, payload) {
     if (features.length) {
       const viewport = getViewport(state, payload);
       tempState.setIn(['style', 'center'], fromJS(viewport.center));
-      tempState.setIn(['style', 'zoom'], 8);//viewport.zoom - 0.5);
+      tempState.setIn(['style', 'zoom'], viewport.zoom - 0.5);
       tempState.set('highestId', state.get('highestId') + features.length);
     }
     if (currentFilter.page) {
