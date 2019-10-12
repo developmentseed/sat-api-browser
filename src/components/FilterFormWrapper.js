@@ -48,7 +48,6 @@ export const FilterFormWrapper = withFormik({
       dateTimes[1] = new Date();
     }
     const initialValues = {
-      query: query || {},
       startdatetime: dateTimes[0],
       enddatetime: dateTimes[1]
     };

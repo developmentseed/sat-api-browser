@@ -8,9 +8,10 @@ export function fetchFilteredItems(filter) {
     type: types.FETCH_FILTERED_ITEMS,
     payload: filter
   };
+
   return {
     [RSAA]: {
-      endpoint: `${BASE_URL}/stac/search`,
+      endpoint: `${BASE_URL}/search`,
       method: 'POST',
       types: [
         fetchAction,

@@ -120,7 +120,7 @@ export const FilterForm = (props) => {
           <div className={classes.submit}>
             <ProgressButton
               type="submit"
-              disabled={!isValid || !bbox || status === loading}
+              disabled={!isValid || status === loading}
               label="Submit Query"
               status={status}
               onClick={handleSubmit}
