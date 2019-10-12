@@ -13,6 +13,7 @@ import { loading, failed } from '../constants/applicationConstants';
 import ProgressButton from './ProgressButton';
 import PropertySelector from './PropertySelector';
 import PropertyFilters from './PropertyFilters';
+import WrappedTextField from './WrappedTextField';
 
 const styles = theme => ({
   button: {

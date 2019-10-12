@@ -116,7 +116,6 @@ export const FilterFormWrapper = withFormik({
     const filter = {
       limit,
       bbox,
-      query,
       time: `${format(startdatetime, formatStr)}/${format(enddatetime, formatStr)}`
     };
     fetchFilteredItemsAction(filter);

@@ -46,7 +46,7 @@
     "typeface-roboto": "^0.0.54"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --port 3001",
     "build": "react-scripts build",
     "test": "NODE_ENV=test ./node_modules/.bin/tape ./test/test.js",
     "eject": "react-scripts eject",

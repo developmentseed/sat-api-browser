@@ -5,6 +5,7 @@ import centerOfMass from '@turf/center-of-mass';
 import geoViewport from '@mapbox/geo-viewport';
 import * as actions from '../constants/action_types';
 import * as stylesheetConstants from '../constants/stylesheetConstants';
+import url from 'url';
 
 const getViewport = (state, geoJSON) => {
   const bounds = bbox(geoJSON);
@@ -57,8 +58,8 @@ const setActiveImageItem = (state, payload) => {
   } else {
     const {
       filteredItemsSource,
-      // activeImageItemSource,
-      // activeImageItem,
+      activeImageItemSource,
+      activeImageItem,
       activeImagePoint
     } = stylesheetConstants;
 
@@ -76,10 +77,25 @@ const setActiveImageItem = (state, payload) => {
     const imageItemJS = imageItem.toJS();
     const viewport = getViewport(state, imageItemJS);
 
+    const tileJsonUrl = 'https://htihpuyave.execute-api.us-east-1.amazonaws.com/production/tilejson.json';
+    const s3CogUrl = `s3://${imageItem.getIn(['assets', 'cogs']).toJS()[0]}`;
+    const tilePath = `${tileJsonUrl}?url=${s3CogUrl}&rescale=0,70&color_map=schwarzwald`;
+
     newState = state.withMutations((tempState) => {
       tempState.set('activeImageItemId', imageId);
       tempState.setIn(['style', 'center'], fromJS(viewport.center));
       tempState.setIn(['style', 'zoom'], viewport.zoom - 0.5);
+      tempState.setIn(
+        ['style', 'sources', activeImageItemSource, 'url'], tilePath
+      );
+      tempState.updateIn(
+        ['style', 'layers'],
+        (layers) => {
+          const index = layers
+            .findIndex(layer => layer.get('id') === activeImageItem);
+          return layers.setIn([index, 'layout', 'visibility'], 'visible');
+        }
+      );
       tempState.updateIn(
         ['style', 'layers'],
         (layers) => {
